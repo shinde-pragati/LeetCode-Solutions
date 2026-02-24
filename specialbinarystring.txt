@@ -1,0 +1,29 @@
+class Solution {
+public:
+    string makeLargestSpecial(string s) {
+        if (s.empty()) return "";
+        
+        int count = 0;
+        int i = 0;
+        vector<string> substrings;
+        
+        for (int j = 0; j < s.length(); j++) {
+            count += (s[j] == '1') ? 1 : -1;
+            if (count == 0) {
+  
+                string inner = makeLargestSpecial(s.substr(i+1, j-i-1));
+                substrings.push_back("1" + inner + "0");
+                i = j + 1;
+            }
+        }
+        
+        
+        sort(substrings.begin(), substrings.end(), greater<string>());
+        
+        string result;
+        for (const string& sub : substrings) {
+            result += sub;
+        }
+        return result;
+    }
+};
