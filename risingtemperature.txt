@@ -1,0 +1,10 @@
+WITH temp_comparison AS (
+    SELECT 
+        id,
+        temperature,
+        LAG(temperature) OVER (ORDER BY recordDate) AS prev_temp
+    FROM Weather
+)
+SELECT id
+FROM temp_comparison
+WHERE temperature > prev_temp;
