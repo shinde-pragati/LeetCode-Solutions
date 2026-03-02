@@ -12,7 +12,7 @@ public:
             }
         }
         
-        // If we end at the last index, last character was 1-bit
+        
         return i == n - 1;
     }
 };
