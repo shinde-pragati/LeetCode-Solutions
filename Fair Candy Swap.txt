@@ -1,0 +1,20 @@
+class Solution {
+public:
+    vector<int> fairCandySwap(vector<int>& aliceSizes, vector<int>& bobSizes) {
+        int sumAlice = accumulate(aliceSizes.begin(), aliceSizes.end(), 0);
+        int sumBob = accumulate(bobSizes.begin(), bobSizes.end(), 0);
+        
+        int diff = (sumAlice - sumBob) / 2;
+        
+        unordered_set<int> bobSet(bobSizes.begin(), bobSizes.end());
+        
+        for (int aliceCandy : aliceSizes) {
+            int bobCandy = aliceCandy - diff;
+            if (bobSet.count(bobCandy)) {
+                return {aliceCandy, bobCandy};
+            }
+        }
+        
+        return {}; 
+    }
+};
