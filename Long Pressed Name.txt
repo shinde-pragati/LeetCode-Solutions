@@ -1,0 +1,24 @@
+class Solution {
+public:
+    bool isLongPressedName(string name, string typed) {
+        int i = 0; // pointer for name
+        int j = 0; // pointer for typed
+        
+        while (j < typed.length()) {
+            // If characters match, move both pointers
+            if (i < name.length() && name[i] == typed[j]) {
+                i++;
+                j++;
+            }
+            else if (j > 0 && typed[j] == typed[j - 1]) {
+                j++;
+            }
+         
+            else {
+                return false;
+            }
+        }
+        
+        return i == name.length();
+    }
+};
