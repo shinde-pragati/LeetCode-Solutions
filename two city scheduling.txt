@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int twoCitySchedCost(vector<vector<int>>& costs) {
+        int n = costs.size() / 2;
+        int total = 0;
+        
+        // First, send everyone to city A
+        for (int i = 0; i < costs.size(); i++) {
+            total += costs[i][0];
+        }
+        
+        // Calculate savings if we send to B instead of A
+        vector<int> savings;
+        for (int i = 0; i < costs.size(); i++) {
+            savings.push_back(costs[i][1] - costs[i][0]);
+        }
+        
+        // Sort savings - we want the most negative ones
+        sort(savings.begin(), savings.end());
+        
+        // Switch n people to city B (pick the n smallest savings)
+        for (int i = 0; i < n; i++) {
+            total += savings[i];
+        }
+        
+        return total;
+    }
+};
