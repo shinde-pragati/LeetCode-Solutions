@@ -1,0 +1,34 @@
+class Solution {
+public:
+    vector<int> numMovesStones(int a, int b, int c) {
+        // Sort the three positions
+        vector<int> pos = {a, b, c};
+        sort(pos.begin(), pos.end());
+        
+        int x = pos[0], y = pos[1], z = pos[2];
+        
+        // Maximum moves: move endpoints inward one step at a time
+        int maxMoves = (z - x - 2);
+        
+        // Minimum moves:
+        int minMoves;
+        
+        // Check if already consecutive
+        if (z - x == 2) {
+            minMoves = 0;
+        }
+        // Check if one move can make them consecutive
+        else if (y - x == 1 && z - y == 1) {
+            minMoves = 0;
+        }
+        // If any two stones are adjacent or have a gap of 2, one move suffices
+        else if (y - x <= 2 || z - y <= 2) {
+            minMoves = 1;
+        }
+        else {
+            minMoves = 2;
+        }
+        
+        return {minMoves, maxMoves};
+    }
+};
