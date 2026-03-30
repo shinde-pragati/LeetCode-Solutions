@@ -1,0 +1,26 @@
+class Solution {
+public:
+    bool isRobotBounded(string instructions) {
+        // Directions: north, east, south, west
+        // dx, dy represent movement in each direction
+        vector<pair<int, int>> dirs = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        
+        int x = 0, y = 0;      // starting position
+        int dir = 0;           // 0 = north, 1 = east, 2 = south, 3 = west
+        
+        for (char instruction : instructions) {
+            if (instruction == 'G') {
+                x += dirs[dir].first;
+                y += dirs[dir].second;
+            } else if (instruction == 'L') {
+                dir = (dir + 3) % 4;  // turn left (counterclockwise)
+            } else if (instruction == 'R') {
+                dir = (dir + 1) % 4;  // turn right (clockwise)
+            }
+        }
+        
+        // After one cycle:
+        // If back at origin OR not facing north, it's bounded
+        return (x == 0 && y == 0) || dir != 0;
+    }
+};
