@@ -1,0 +1,43 @@
+#include <string>
+using namespace std;
+
+class Solution {
+public:
+    string alphabetBoardPath(string target) {
+        int r = 0, c = 0;
+        string ans = "";
+
+        for(char ch : target){
+            int nr = (ch - 'a') / 5;
+            int nc = (ch - 'a') % 5;
+
+            // move up
+            while(r > nr){
+                ans += 'U';
+                r--;
+            }
+
+            // move left
+            while(c > nc){
+                ans += 'L';
+                c--;
+            }
+
+            // move down
+            while(r < nr){
+                ans += 'D';
+                r++;
+            }
+
+            // move right
+            while(c < nc){
+                ans += 'R';
+                c++;
+            }
+
+            ans += '!';
+        }
+
+        return ans;
+    }
+};
